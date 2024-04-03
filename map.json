@@ -1,0 +1,16 @@
+{
+  "urls": {
+    "y": "https://youtube.com",
+    "m": "https://mkrs-beta.vercel.app",
+    "v": "https://vk.com",
+    "p": "https://ru.pinterest.com",
+    "e": "https://edu.pgu.ru",
+    "g": "https://github.com",
+    "d": "https://docs.google.com",
+    "t": "https://web.telegram.org/a/",
+    "s": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2"
+  },
+  "directories": {
+    "n": "C:\\dev\\web\\next"
+  }
+}
