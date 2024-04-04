@@ -6,25 +6,6 @@ $map = $mapRaw | ConvertFrom-Json
 $urls = $map.urls
 $directories = $map.directories
 
-function Write-Hotkeys {
-  Clear-Host
-  $map.PSObject.Properties | ForEach-Object {
-    $separator = "-" * $_.Name.Length
-    Write-Host @"
-$separator
-$($_.Name.toUpper())
-$separator
-"@ -ForegroundColor DarkGray
-    [int] $longest = ($_.Value.PSObject.Properties.Name | Measure-Object -Property Length -Maximum).Maximum
-    $_.Value.PSObject.Properties | ForEach-Object {
-      Write-Host $_.Name.toUpper() -f Yellow -NoNewline;
-      Write-Host (" " * ($longest - $_.Name.Length)) -NoNewline;
-      Write-Host " | " -f DarkGray -NoNewline;
-      Write-Host $_.Value.description;
-    }
-  }
-}
-
 while ($true) {
   $key = [System.Console]::ReadKey($true)
   $ch = $key.KeyChar.ToString().ToLower()
@@ -34,7 +15,23 @@ while ($true) {
       $global:search = ""
     }
     "Spacebar" {
-      Write-Hotkeys
+      Clear-Host
+      $map.PSObject.Properties | ForEach-Object {
+        $separator = "-" * $_.Name.Length
+        Write-Host @"
+$separator
+$($_.Name.toUpper())
+$separator
+"@ -ForegroundColor DarkGray
+        [int] $longest = ($_.Value.PSObject.Properties.Name | Measure-Object -Property Length -Maximum).Maximum
+        $_.Value.PSObject.Properties | ForEach-Object {
+          Write-Host $_.Name.toUpper() -f Yellow -NoNewline;
+          Write-Host (" " * ($longest - $_.Name.Length)) -NoNewline;
+          Write-Host " | " -f DarkGray -NoNewline;
+          Write-Host $_.Value.description;
+        }
+      }
+
     }
     "$($map.other.exit.key)" {
       exit
@@ -54,17 +51,17 @@ while ($true) {
   }
   if ($global:search.Length -gt 0 -and $suggestions.Length -gt 0) {
     Write-Host ""
-    foreach ($m in $suggestions) {
-      Write-Host "$($m.Name) $($m.Value.description)" -f DarkGray
+    foreach ($s in $suggestions) {
+      Write-Host "$($s.Name) $($s.Value.description)" -f DarkGray
     }
   }
-  $urlMatch = $urls.PSObject.Properties[$global:search]
-  $directoryMatch = $directories.PSObject.Properties[$global:search]
+  $urlMatch = $urls.PSObject.Properties[$global:search].Value
+  $directoryMatch = $directories.PSObject.Properties[$global:search].Value
   if ($null -ne $urlMatch) {
-    Start-Process $urlMatch.Value.url
+    Start-Process $urlMatch.url
     exit
   } elseif ($null -ne $directoryMatch) {
-    Invoke-Item $directoryMatch.Value.url
+    Invoke-Item $directoryMatch.url
     exit
   }
 }
