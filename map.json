@@ -1,20 +1,22 @@
 {
   "urls": {
-    "y": "https://youtube.com",
-    "m": "https://mkrs-beta.vercel.app",
-    "v": "https://vk.com",
-    "p": "https://ru.pinterest.com",
-    "e": "https://edu.pgu.ru",
-    "g": "https://github.com",
-    "d": "https://docs.google.com",
-    "tg": "https://web.telegram.org/a/",
-    "h": "https://web.telegram.org/a/#-1001915587094",
-    "sm": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2",
-    "tr": "https://context.reverso.net/перевод/",
-    "tc": "https://context.reverso.net/перевод/английский-китайский/"
+    "y": { "url": "https://youtube.com", "description": "ютуб" },
+    "m": { "url": "https://mkrs-beta.vercel.app", "description": "мкрс" },
+    "v": { "url": "https://vk.com", "description": "вк" },
+    "p": { "url": "https://ru.pinterest.com", "description": "пинтерест" },
+    "e": { "url": "https://edu.pgu.ru", "description": "еду" },
+    "g": { "url": "https://github.com", "description": "гитхаб" },
+    "d": { "url": "https://docs.google.com", "description": "докс" },
+    "sm": { "url": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2", "description": "сей-ла-муууу" },
+    "h": { "url": "https://web.telegram.org/a/#-1001915587094", "description": "телега домашка" },
+    "t": { "url": "https://web.telegram.org/a/", "description": "телега" },
+    "r": { "url": "https://context.reverso.net/перевод", "description": "англ-рус" },
+    "c": { "url": "https://context.reverso.net/перевод/английский-китайский", "description": "англ-кит" }
   },
   "directories": {
-    "n": "C:\\dev\\web\\next"
+    "n": { "url": "C:\\dev\\web\\next", "description": "некст" }
   },
-  "other": {}
+  "other": {
+    "exit": { "key": "x", "description": "выход" }
+  }
 }

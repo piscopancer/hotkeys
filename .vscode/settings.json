@@ -7,19 +7,31 @@
         "properties": {
           "urls": {
             "additionalProperties": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "url": { "type": "string" },
+                "description": { "type": "string" }
+              }
             }
           },
           "directories": {
             "additionalProperties": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "url": { "type": "string" },
+                "description": { "type": "string" }
+              }
             }
           },
           "other": {
             "type": "object",
             "properties": {
               "exit": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                  "key": { "type": "string" },
+                  "description": { "type": "string" }
+                }
               }
             }
           }

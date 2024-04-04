@@ -3,21 +3,65 @@
 $mapRaw = Get-Content "C:\dev\other\hotkeys\map.json"
 $mapRaw = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Default.GetBytes($mapRaw))
 $map = $mapRaw | ConvertFrom-Json
-[psobject] $urls = $map.urls.PSObject
+$urls = $map.urls
+$directories = $map.directories
+
+function Write-Hotkeys {
+  Clear-Host
+  $map.PSObject.Properties | ForEach-Object {
+    $separator = "-" * $_.Name.Length
+    Write-Host @"
+$separator
+$($_.Name.toUpper())
+$separator
+"@ -ForegroundColor DarkGray
+    [int] $longest = ($_.Value.PSObject.Properties.Name | Measure-Object -Property Length -Maximum).Maximum
+    $_.Value.PSObject.Properties | ForEach-Object {
+      Write-Host $_.Name.toUpper() -f Yellow -NoNewline;
+      Write-Host (" " * ($longest - $_.Name.Length)) -NoNewline;
+      Write-Host " | " -f DarkGray -NoNewline;
+      Write-Host $_.Value.description;
+    }
+  }
+}
 
 while ($true) {
   $key = [System.Console]::ReadKey($true)
   $ch = $key.KeyChar.ToString().ToLower()
-  if ($key.Key -eq "Backspace" -and $global:search.Length -gt 0) {
-    $global:search = $global:search.Remove($global:search.Length - 1, 1)
-  } elseif ($key.KeyChar -ne 0) {
-    $global:search += $ch
-  }
   Clear-Host
-  $global:search
-  Write-Host $urls.ToString() | Select-Object -Property $_.Name
-  $urls.Properties[$global:search].Value | Select-Object
-  if ($null -ne $urls.Properties[$global:search]) {
-    Write-Host $url  
+  switch ($key.Key) {
+    "Backspace" { 
+      $global:search = ""
+    }
+    "Spacebar" {
+      Write-Hotkeys
+    }
+    "$($map.other.exit.key)" {
+      exit
+    }
+    default {
+      if ($key.KeyChar -ne 0) {
+        $global:search = $global:search + $ch
+      }
+    }
+  }
+  Write-Host $global:search -b White -f Black -NoNewline
+  [System.Object[]] $suggestions = @()
+  ([psobject] $urls.psobject).Properties | ForEach-Object {
+    if ($_.Name.StartsWith($global:search) -and $_.Name -ne $global:search) {
+      $suggestions += $_
+    }
+  }
+  if ($global:search.Length -gt 0 -and $suggestions.Length -gt 0) {
+    Write-Host ""
+    foreach ($m in $suggestions) {
+      Write-Host "$($m.Name) $($m.Value.description)" -f DarkGray
+    }
+  }
+  if ($null -ne $urls.PSObject.Properties[$global:search]) {
+    Start-Process $urls.PSObject.Properties[$global:search].Value.url
+  } elseif ($null -ne $directories.PSObject.Properties[$global:search]) {
+    Invoke-Item $directories.PSObject.Properties[$global:search].Value.url
   }
 }
+
