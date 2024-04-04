@@ -7,8 +7,11 @@
     "e": "https://edu.pgu.ru",
     "g": "https://github.com",
     "d": "https://docs.google.com",
-    "t": "https://web.telegram.org/a/",
-    "s": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2"
+    "tg": "https://web.telegram.org/a/",
+    "h": "https://web.telegram.org/a/#-1001915587094",
+    "sm": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2",
+    "tr": "https://context.reverso.net/перевод/",
+    "tc": "https://context.reverso.net/перевод/английский-китайский/"
   },
   "directories": {
     "n": "C:\\dev\\web\\next"

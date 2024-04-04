@@ -23,9 +23,9 @@ while ($true) {
 $separator
 $($_.Name.toUpper())
 $separator
-"@ -ForegroundColor Green          
+"@ -ForegroundColor DarkGray
         $_.Value.PSObject.Properties | ForEach-Object {
-          Write-Host $_.Name.toUpper() -f Cyan -NoNewline;
+          Write-Host $_.Name.toUpper() -f Yellow -NoNewline;
           Write-Host " => " -f DarkGray -NoNewline;
           Write-Host $_.Value;
         }
