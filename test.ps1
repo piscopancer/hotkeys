@@ -1,7 +1,9 @@
 [string] $global:search = ''
 
-$map = Get-Content "C:\dev\other\hotkeys\map.json" | ConvertFrom-Json
-$urls = $map.urls
+$mapRaw = Get-Content "C:\dev\other\hotkeys\map.json"
+$mapRaw = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Default.GetBytes($mapRaw))
+$map = $mapRaw | ConvertFrom-Json
+[psobject] $urls = $map.urls.PSObject
 
 while ($true) {
   $key = [System.Console]::ReadKey($true)
@@ -13,9 +15,9 @@ while ($true) {
   }
   Clear-Host
   $global:search
-  if ($null -ne $urls.PSObject.Properties[$global:search]) {
-    $url = $urls.PSObject.Properties[$global:search]
-    $url = [System.Text.Encoding]::UTF8.GetString([System.Text.Encoding]::Default.GetBytes($url))
+  Write-Host $urls.ToString() | Select-Object -Property $_.Name
+  $urls.Properties[$global:search].Value | Select-Object
+  if ($null -ne $urls.Properties[$global:search]) {
     Write-Host $url  
   }
 }

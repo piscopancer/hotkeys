@@ -1,0 +1,30 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["map.json"],
+      "schema": {
+        "type": "object",
+        "properties": {
+          "urls": {
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "directories": {
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "other": {
+            "type": "object",
+            "properties": {
+              "exit": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
