@@ -15,11 +15,13 @@
     "sp": { "url": "C:\\Users\\Igor\\AppData\\Roaming\\Spotify\\Spotify.exe", "description": "спотифай" }
   },
   "directories": {
-    "n": { "url": "C:\\dev\\web\\next", "description": "некст" }
+    "n": { "url": "C:\\dev\\web\\next", "description": "некст" },
+    "st": { "url": "C:\\Users\\Igor\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\", "description": "автозагрузка" }
   },
   "other": {
-    "root": { "key": ".", "description": "папка проекта" },
+    "root": { "key": ".r", "description": "папка проекта" },
     "help": { "key": "spacebar", "description": "помощь" },
-    "exit": { "key": "x", "description": "выход" }
+    "exit": { "key": "x", "description": "выход" },
+    "checkStartup": { "key": ".s", "description": "проверка автозагрузки" }
   }
 }

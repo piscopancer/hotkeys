@@ -1,8 +1,10 @@
-[string] $global:search = ''
+﻿[string] $global:search = ''
 
+$shortcutName = "hk.lnk"
 $map = (Get-Content -Path "$((Get-Location).Path)\hk-map.json" -Encoding UTF8) | ConvertFrom-Json
 $urls = $map.urls
 $directories = $map.directories
+$other = $map.other
 $replacements = (Get-Content -Path "$((Get-Location).Path)\replacements.json" -Encoding UTF8) | ConvertFrom-Json
 
 while ($true) {
@@ -37,11 +39,6 @@ $line
         }
       }
     }
-  } elseif ($key -eq $map.other.exit.key) {
-    exit
-  } elseif ($key -eq $map.other.root.key) {
-    Invoke-Item (Get-Location).Path
-    exit
   } else {
     if ($key.KeyChar -ne 0) {
       $replacement = $replacements.PSObject.Properties[$ch] 
@@ -51,7 +48,9 @@ $line
       $global:search = $global:search + $ch
     }
   }
+
   Write-Host $global:search -b White -f Black -NoNewline
+  
   [System.Object[]] $suggestions = @()
   ([psobject] $urls.psobject).Properties | ForEach-Object {
     if ($_.Name.StartsWith($global:search) -and $_.Name -ne $global:search) {
@@ -64,6 +63,7 @@ $line
       Write-Host "$($s.Name) $($s.Value.description)" -f DarkGray
     }
   }
+
   $urlMatch = $urls.PSObject.Properties[$global:search].Value
   $directoryMatch = $directories.PSObject.Properties[$global:search].Value
   if ($null -ne $urlMatch) {
@@ -72,6 +72,20 @@ $line
   } elseif ($null -ne $directoryMatch) {
     Invoke-Item $directoryMatch.url
     exit
+  } else {
+    if ($global:search -eq $other.exit.key) {
+      exit
+    } elseif ($global:search -eq $other.checkStartup.key) {
+      if (Test-Path "C:\Users\$([Environment]::UserName)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\$shortcutName") {
+        Write-Host "Автозагрузка включена (*^▽^*)" -f Green 
+      } else {
+        Write-Host "Не на автозагрузке (>'-'<)" -f Yellow
+      }
+      continue
+    } elseif ($global:search -eq $other.root.key) {
+      Invoke-Item (Get-Location).Path
+      exit
+    }
   }
 }
 
