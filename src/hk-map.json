@@ -7,16 +7,19 @@
     "e": { "url": "https://edu.pgu.ru", "description": "еду" },
     "g": { "url": "https://github.com", "description": "гитхаб" },
     "d": { "url": "https://docs.google.com", "description": "докс" },
-    "sm": { "url": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2", "description": "сей-ла-муууу" },
     "h": { "url": "https://web.telegram.org/a/#-1001915587094", "description": "телега домашка" },
     "t": { "url": "https://web.telegram.org/a/", "description": "телега" },
     "r": { "url": "https://context.reverso.net/перевод", "description": "англ-рус" },
-    "c": { "url": "https://context.reverso.net/перевод/английский-китайский", "description": "англ-кит" }
+    "c": { "url": "https://context.reverso.net/перевод/английский-китайский", "description": "англ-кит" },
+    "sm": { "url": "https://animegoo.online/152-krasavica-voin-sejlor-mun.html#video-watch2", "description": "сей-ла-муууу" },
+    "sp": { "url": "C:\\Users\\Igor\\AppData\\Roaming\\Spotify\\Spotify.exe", "description": "спотифай" }
   },
   "directories": {
     "n": { "url": "C:\\dev\\web\\next", "description": "некст" }
   },
   "other": {
+    "root": { "key": ".", "description": "папка проекта" },
+    "help": { "key": "spacebar", "description": "помощь" },
     "exit": { "key": "x", "description": "выход" }
   }
 }
