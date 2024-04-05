@@ -27,8 +27,8 @@ $line
       [int] $longest = ($_.Value.PSObject.Properties.Name | Measure-Object -Property Length -Maximum).Maximum
       $_.Value.PSObject.Properties | ForEach-Object {
         if ($groupname -eq "other") {
-          Write-Host $_.Value.Key.toUpper() -f Yellow -NoNewline;
-          Write-Host (" " * ($longest - $_.Name.Length)) -NoNewline;
+          Write-Host $_.Value.key.toUpper() -f Yellow -NoNewline;
+          Write-Host (" " * (12 - $_.Value.key.length)) -NoNewline;
           Write-Host " | " -f DarkGray -NoNewline;
           Write-Host $_.Value.description -f DarkGray;
         } else {
@@ -76,6 +76,7 @@ $line
     if ($global:search -eq $other.exit.key) {
       exit
     } elseif ($global:search -eq $other.checkStartup.key) {
+      Write-Host ""
       if (Test-Path "C:\Users\$([Environment]::UserName)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\$shortcutName") {
         Write-Host "Автозагрузка включена (*^▽^*)" -f Green 
       } else {
