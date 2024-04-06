@@ -46,7 +46,7 @@
    Restricted
    ```
 
-   Чтобы PowerShell разрешал запускать этот "вредоносный" скрипт, нужно изменить **ExecutionPolicy** на `Unrestricted` с помощью команды:
+   Текущая политика может оказаться `Restricted`. Чтобы PowerShell разрешал запускать сторонние скрипты, нужно изменить **ExecutionPolicy** на `Unrestricted` с помощью команды:
 
    ```ps
    PS C:\Users\Igor> Set-ExecutionPolicy Unrestricted
