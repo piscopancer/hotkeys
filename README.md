@@ -41,14 +41,14 @@
 
 1. Для начала стоит проверить разрешение на запуск скриптов PowerShell. Откройте консоль PowerShell и выполните следующую команду:
 
-   ```ps
+   ```ps1
    PS C:\Users\Igor> Get-ExecutionPolicy
    Restricted
    ```
 
    Текущая политика может оказаться `Restricted`. Чтобы PowerShell разрешал запускать сторонние скрипты, нужно изменить **ExecutionPolicy** на `Unrestricted` с помощью команды:
 
-   ```ps
+   ```ps1
    PS C:\Users\Igor> Set-ExecutionPolicy Unrestricted
    ```
 
